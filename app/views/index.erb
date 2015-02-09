@@ -1,0 +1,9 @@
+<div id="random-product">
+  <h2>Random Products</h2>
+  <ul>
+  <% @random_products.each do |product| %>
+    <li> <%= product.name %> <img src="<%= product.image %>"/> </li>
+  <% end %>
+  </ul>
+</div>
+

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 
+  <!--
     normalize.css removes cross-browser differences in defaults, e.g.,
     differences in how form elements appear between Firefox and IE
     See: http://necolas.github.com/normalize.css/
@@ -18,6 +18,56 @@
   <title></title>
 </head>
 <body>
+
+
+
+<div id="top-bar">
+  <form action="/login" method="POST">
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+    <input type="submit" value="login!">
+  </form>
+
+  <% if session[:user_id] %>
+    <p>Welcome, <%= User.find(session[:user_id]).username %>!</p>
+  <% end %>
+
+  <%= "Incorrect login credentials." if @false_login == true %>
+
+ <div id="right-link-topbar">
+   <a href="/signup"> signup </a>
+   <a href="/lost-password"> lost password </a>
+   <a href="/logout"> logout </a>
+ </div>
+
+</div>
+<h1><a href="/"> Welcome to YoonCommerce!</a></h1>
+
+<div id="categories">
+  <h2>Categories</h2>
+  <% @categories.each do |category| %>
+    <p><a href="/category/<%= category.name %>"><%= category.name %></a></p>
+  <% end %>
+</div>
+
+<div id="cart">
+  <h2> Cart </h2>
+  <% if session[:cart] %>
+     <ul>
+       <% session[:cart].each do |product| %>
+        <li><%= product.name %> <%= product.price %></li>
+       <% end %>
+    </ul>
+  <% end %>
+</div>
+
+
+
+
   <%= yield %>
+
+<div id="footer">
+  Copyright Kevin Yoon Inc.
+</div>
 </body>
 </html>
